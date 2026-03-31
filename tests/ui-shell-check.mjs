@@ -18,13 +18,13 @@ assert.doesNotMatch(html, /id="context-menu"/, "expected temporary exit-only men
 assert.match(html, />内存</, "expected memory label to be localized");
 assert.match(html, />上传</, "expected upload label to be localized");
 assert.match(html, />下载</, "expected download label to be localized");
-assert.match(html, />磁盘读</, "expected disk read label to be localized");
-assert.match(html, />磁盘写</, "expected disk write label to be localized");
+assert.match(html, />磁盘�?/, "expected disk read label to be localized");
+assert.match(html, />磁盘�?/, "expected disk write label to be localized");
 assert.match(html, />刷新间隔</, "expected refresh interval label to be localized");
-assert.match(html, />透明度</, "expected opacity label to be localized");
-assert.match(html, />显示项</, "expected visible metrics legend to be localized");
+assert.match(html, />透明�?/, "expected opacity label to be localized");
+assert.match(html, />显示�?/, "expected visible metrics legend to be localized");
 assert.match(html, />完成</, "expected done button to be present again");
-assert.match(html, />退出</, "expected exit button to be localized");
+assert.match(html, />退�?/, "expected exit button to be localized");
 
 const js = fs.readFileSync(path.join(root, "src", "main.js"), "utf8");
 assert.match(js, /toggleControlPanel/, "expected direct control panel toggle logic");
@@ -52,6 +52,26 @@ const rust = fs.readFileSync(path.join(root, "src-tauri", "src", "main.rs"), "ut
 assert.match(rust, /fn resize_window_to_content/, "expected Rust resize command");
 assert.match(rust, /fn show_main_window/, "expected a Rust command that reveals the window after initial sizing");
 assert.match(rust, /fn set_auto_positioning/, "expected Rust command to control auto positioning");
+assert.match(
+  rust,
+  /tauri_plugin_single_instance::init/,
+  "expected Rust startup to register the Tauri single-instance plugin"
+);
+assert.match(
+  rust,
+  /\.plugin\(tauri_plugin_single_instance::init\(/,
+  "expected the Tauri builder to install the single-instance plugin"
+);
+assert.match(
+  rust,
+  /show_window\(&app\)/,
+  "expected a second launch to reveal the existing main window"
+);
+assert.doesNotMatch(
+  rust,
+  /CreateMutexW|GetLastError|ERROR_ALREADY_EXISTS|acquire_single_instance_guard/,
+  "expected the old Win32 mutex guard to be removed"
+);
 assert.match(rust, /set_background_color/, "expected window setup to force a transparent background");
 assert.match(rust, /TrayIconBuilder/, "expected the Tauri shell to build a tray icon");
 assert.doesNotMatch(rust, /show_window\(app\.handle\(\)\)\?;/, "expected setup to keep the window hidden until frontend sizing finishes");

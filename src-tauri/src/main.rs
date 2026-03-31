@@ -213,6 +213,10 @@ fn main() {
     );
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+            let app = app.clone();
+            let _ = show_window(&app);
+        }))
         .manage(AppState::new(
             initial_config,
             collector,
