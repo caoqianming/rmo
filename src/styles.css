@@ -1,0 +1,151 @@
+:root {
+  color-scheme: dark;
+  --panel-alpha: 0.85;
+  --panel-bg: rgba(17, 24, 39, var(--panel-alpha));
+  --panel-border: rgba(17, 24, 39, var(--panel-alpha));
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --green: #4ade80;
+  --yellow: #facc15;
+  --red: #f87171;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: max-content;
+  height: max-content;
+  background: transparent;
+  font-family: "Segoe UI", "PingFang SC", sans-serif;
+  color: var(--text);
+  user-select: none;
+}
+
+body {
+  display: inline-block;
+  padding: 0;
+  overflow: hidden;
+}
+
+.monitor {
+  min-width: 132px;
+  margin: 0;
+  padding: 6px 7px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  box-shadow: none;
+  backdrop-filter: blur(10px);
+}
+
+.metrics {
+  display: grid;
+  gap: 6px;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+  line-height: 1.1;
+}
+
+.metric-label {
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+
+.metric-value {
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-value.neutral {
+  color: var(--muted);
+}
+
+.metric-value.yellow {
+  color: var(--yellow);
+}
+
+.metric-value.red {
+  color: var(--red);
+}
+
+.control-panel {
+  display: grid;
+  width: 100%;
+  gap: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.field output,
+.checkbox-group label,
+.field span,
+.field legend {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.checkbox-group {
+  border: 0;
+  padding: 0;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ghost-button {
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  background: rgba(148, 163, 184, 0.14);
+  color: var(--text);
+  text-align: center;
+  cursor: pointer;
+}
+
+.ghost-button:hover {
+  background: rgba(148, 163, 184, 0.22);
+}
+
+.ghost-button.danger {
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.28);
+}
+
+.ghost-button.danger:hover {
+  background: rgba(127, 29, 29, 0.42);
+}
+
+.settings-error {
+  margin: 0;
+  color: var(--red);
+  font-size: 12px;
+}

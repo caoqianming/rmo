@@ -1,0 +1,8 @@
+/target
+/.worktrees
+/.claude
+/.superpowers
+
+/src-tauri/target
+cl.bat
+col.bat
